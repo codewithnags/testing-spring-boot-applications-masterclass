@@ -1,53 +1,42 @@
 package de.rieckpil.courses.book.review;
 
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 public class ReviewVerifierTest {
 
   private ReviewVerifier reviewVerifier;
 
-  public ReviewVerifierTest(){
-    System.out.println("instance of ReviewVerifierTest....");
-  }
   @BeforeEach
   public void setUp() {
-    System.out.print("Before Each");
     reviewVerifier = new ReviewVerifier();
-  }
-
-  @AfterEach
-  public void tearDown() {
-    System.out.print("After Each");
-  }
-
-  @BeforeAll
-  public static void beforeAll(){
-    System.out.print("beforeAll Each");
-
-  }
-
-  @AfterAll
-  public static void afterAll(){
-    System.out.print("beforeAll Each");
-
   }
 
   @Test
   void shouldFailWhenReviewContainsSwearWord() {
     String review = "This book is shit";
-
     System.out.println("Testing a review");
+
     boolean result = reviewVerifier.doesMeetQualityStandards(review);
-    Assertions.assertFalse(result);
+
+    assertFalse(result,"ReviewVerifier did mot detect swear word");
+    assertEquals(false,result);
   }
 
   @Test
-  void shouldFailWhenReviewContainsSwearWordTwo() {
-    String review = "This book is shit";
+  @DisplayName("should fail when review contans 'lorem ipsum'")
+  void testLoremIpsum(){
+    String review = "lorem ipsum";
 
-    System.out.println("Testing a review");
     boolean result = reviewVerifier.doesMeetQualityStandards(review);
-    Assertions.assertFalse(result);
+
+    assertFalse(result,"ReviewVerifier did mot detect lorem ipsum");
   }
+
 }
